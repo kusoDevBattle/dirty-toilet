@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}汚トイレ一覧{% endblock title %}
+{% block content %}
+
+<h1 align="center"><a href="/register">登録する！</a></h1>
+
+<table border="1" cellspacing="0">
+    <tr>
+        <th>場所</th>
+        <th>コメント</th>
+        <th>緯度</th>
+        <th>経度</th>
+        <th>レベル</th>
+    </tr>
+    {% for toilet in toilets %}
+        <tr>
+            <td>{{ toilet.place }}</td>
+            <td>{{ toilet.comment }}</td>
+            <td>{{ toilet.latitude }}</td>
+            <td>{{ toilet.longitude }}</td>
+            <td>{{ toilet.level }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

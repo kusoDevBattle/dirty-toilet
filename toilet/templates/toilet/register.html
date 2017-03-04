@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}汚トイレ登録{% endblock title %}
+{% block content %}
+
+{% if message == 'not_user'%}
+    <script>
+        alert("ログインしてないから使えへんで")
+        location.href = "/session/login";
+    </script>
+{% endif %}
+
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="place">場所　　</label>
+            <input type="text" id="place" name="place" placeholder="場所" required>
+        </div>
+        <div>
+            <label for="comment">コメント</label>
+            <textarea name="comment" id="comment" cols="30" rows="10" placeholder="(1000文字以内)"></textarea>
+        </div>
+        <input type="hidden" id="latitude" name="latitude" value="">
+        <input type="hidden" id="longitude" name="longitude" value="">
+        <div>
+            <label for="level">レベル　</label>
+            <input type="number" id="level" name="level" placeholder="レベル(1〜10)" required>
+        </div>
+        <div>
+            <input type="submit" value="登録">
+        </div>
+    </form>
+</div>
+
+<div id="map" style="width:500px; height:300px"></div>
+
+<script type="text/javascript">
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
+
+    function success(pos) {
+        var crd = pos.coords;
+
+        console.log('Latitude : ' + crd.latitude);
+        console.log('Longitude: ' + crd.longitude);
+        console.log('More or less ' + crd.accuracy + ' meters.');
+        $("#latitude").val(crd.latitude);
+        $("#longitude").val(crd.longitude);
+
+        display_map(crd.latitude, crd.longitude);
+    };
+
+    function error(err) {
+        alert("クソすぎて取得できなかったわ。\nまじすまんｗ");
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+</script>
+
+{% endblock %}

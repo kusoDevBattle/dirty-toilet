@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,3 +25,4 @@ urlpatterns = [
     url(r'^session/logout/$', auth_views.logout, {'template_name': 'logout.html'}, name='logout'),
     url(r'', include('toilet.urls', namespace='toilet')),
 ]
+
