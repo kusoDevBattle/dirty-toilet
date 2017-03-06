@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
 
 import os
 import re
+import pymysql
 from django.core.wsgi import get_wsgi_application
 
 
@@ -33,6 +34,8 @@ def load_env():
 
 
 load_env()
+
+pymysql.install_as_MySQLdb()
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dirty_toilet.settings")
 
