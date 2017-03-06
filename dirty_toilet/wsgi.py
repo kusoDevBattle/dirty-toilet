@@ -37,6 +37,6 @@ load_env()
 
 pymysql.install_as_MySQLdb()
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dirty_toilet.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dirty_toilet.settings_product")
 
 application = get_wsgi_application()
